@@ -9,7 +9,7 @@
   <header class="card-header bg-white border-0 d-flex justify-content-between align-items-start gap-3 pt-4 px-4">
     <div>
       <p class="text-secondary fw-bold small mb-1">{{ sonda.id }}</p>
-      <h2 class="h4 mb-0">{{ sonda.nombre }}</h2>
+      <h2 class="h4 mb-0">{{ sonda.nombre | uppercase }}</h2>
     </div>
     @if (sonda.enLinea) {
       <span class="badge text-bg-success">En línea</span>
@@ -31,19 +31,19 @@
         <dd class="fw-semibold mb-0">
           @switch (sonda.planetaDestino) {
             @case ('marte') {
-              <span aria-label="Marte">🔴 Marte</span>
+              <span aria-label="Marte">🔴 {{ sonda.planetaDestino | titlecase }}</span>
             }
             @case ('venus') {
-              <span aria-label="Venus">🟠 Venus</span>
+              <span aria-label="Venus">🟠 {{ sonda.planetaDestino | titlecase }}</span>
             }
             @case ('saturno') {
-              <span aria-label="Saturno">🪐 Saturno</span>
+              <span aria-label="Saturno">🪐 {{ sonda.planetaDestino | titlecase }}</span>
             }
             @case ('júpiter') {
-              <span aria-label="Júpiter">🟤 Júpiter</span>
+              <span aria-label="Júpiter">🟤 {{ sonda.planetaDestino | titlecase }}</span>
             }
             @default {
-              <span>{{ sonda.planetaDestino }}</span>
+              <span>{{ sonda.planetaDestino | titlecase }}</span>
             }
           }
         </dd>
@@ -69,6 +69,10 @@
         <dd class="fw-semibold mb-0">
           {{ sonda.ultimaTransmision | date: 'dd/MM/yyyy HH:mm' }}
         </dd>
+      </div>
+      <div class="col-6">
+        <dt class="text-secondary small">Retardo de señal</dt>
+        <dd class="fw-semibold mb-0">{{ sonda.distanciaKm | retardoSenal }}</dd>
       </div>
     </dl>
 

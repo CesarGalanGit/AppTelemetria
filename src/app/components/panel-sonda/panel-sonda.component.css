@@ -1,0 +1,83 @@
+:host {
+  display: block;
+}
+
+.sonda-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  height: 100%;
+  padding: 1.5rem;
+  border: 1px solid #d8dee9;
+  border-radius: 0.75rem;
+  background: #ffffff;
+  box-shadow: 0 0.25rem 1rem rgb(15 23 42 / 8%);
+}
+
+.sonda-card__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.sonda-card__id {
+  margin: 0 0 0.25rem;
+  color: #64748b;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+h2 {
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+.sonda-card__status {
+  padding: 0.35rem 0.65rem;
+  border-radius: 999px;
+  color: #991b1b;
+  background: #fee2e2;
+  font-size: 0.8rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.sonda-card__status--online {
+  color: #166534;
+  background: #dcfce7;
+}
+
+.sonda-card__telemetry {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin: 0;
+}
+
+dt {
+  color: #64748b;
+  font-size: 0.8rem;
+}
+
+dd {
+  margin: 0.25rem 0 0;
+  font-weight: 600;
+}
+
+button {
+  margin-top: auto;
+  padding: 0.7rem 1rem;
+  border: 0;
+  border-radius: 0.5rem;
+  color: #ffffff;
+  background: #2563eb;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 700;
+}
+
+button:hover {
+  background: #1d4ed8;
+}

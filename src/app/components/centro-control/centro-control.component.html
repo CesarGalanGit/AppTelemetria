@@ -1,0 +1,44 @@
+<main class="container py-4">
+  <header class="row align-items-end g-3 mb-4">
+    <div class="col">
+      <p class="text-primary fw-bold text-uppercase small mb-2">
+        Centro de telemetría
+      </p>
+      <h1 class="display-6 fw-bold mb-0">Supervisión de sondas espaciales</h1>
+      <p class="text-secondary mt-2 mb-0">
+        Sondas conectadas:
+        <strong>{{ sondasConectadas }}</strong>
+        de {{ sondas.length }}
+      </p>
+    </div>
+
+    <div class="col-12 col-md-auto">
+      <button
+        type="button"
+        class="btn"
+        [class.btn-primary]="soloAlertas"
+        [class.btn-outline-primary]="!soloAlertas"
+        (click)="alternarFiltroAlertas()"
+      >
+      {{ soloAlertas ? 'Ver todas las sondas' : 'Ver solo sondas en alerta' }}
+      </button>
+    </div>
+  </header>
+
+  <section class="row g-4" aria-label="Listado de sondas">
+    @for (sonda of sondasVisibles; track sonda.id) {
+      <div class="col-12 col-md-6 col-xl-4">
+        <app-panel-sonda
+          [sonda]="sonda"
+          (pulsoRecarga)="recargarSonda($event)"
+        />
+      </div>
+    } @empty {
+      <div class="col-12">
+        <p class="alert alert-info text-center mb-0">
+          No hay sondas en alerta.
+        </p>
+      </div>
+    }
+  </section>
+</main>

@@ -1,0 +1,46 @@
+<article class="card h-100 shadow-sm">
+  <header class="card-header bg-white border-0 d-flex justify-content-between align-items-start gap-3 pt-4 px-4">
+    <div>
+      <p class="text-secondary fw-bold small mb-1">{{ sonda.id }}</p>
+      <h2 class="h4 mb-0">{{ sonda.nombre }}</h2>
+    </div>
+    @if (sonda.enLinea) {
+      <span class="badge text-bg-success">En línea</span>
+    } @else {
+      <span class="badge text-bg-danger">Fuera de línea</span>
+    }
+  </header>
+
+  <div class="card-body px-4">
+    <dl class="row gy-3 mb-0">
+      <div class="col-6">
+        <dt class="text-secondary small">Destino</dt>
+        <dd class="fw-semibold mb-0">{{ sonda.planetaDestino }}</dd>
+      </div>
+      <div class="col-6">
+        <dt class="text-secondary small">Batería</dt>
+        <dd class="fw-semibold mb-0">{{ sonda.bateria }}%</dd>
+      </div>
+      <div class="col-6">
+        <dt class="text-secondary small">Distancia</dt>
+        <dd class="fw-semibold mb-0">{{ sonda.distanciaKm | number }} km</dd>
+      </div>
+      <div class="col-6">
+        <dt class="text-secondary small">Última transmisión</dt>
+        <dd class="fw-semibold mb-0">
+          {{ sonda.ultimaTransmision | date: 'dd/MM/yyyy HH:mm' }}
+        </dd>
+      </div>
+    </dl>
+  </div>
+
+  <footer class="card-footer bg-white border-0 px-4 pb-4">
+    <button
+      type="button"
+      class="btn btn-primary w-100"
+      (click)="enviarPulsoRecarga()"
+    >
+      Enviar pulso de recarga
+    </button>
+  </footer>
+</article>

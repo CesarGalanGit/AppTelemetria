@@ -1,59 +1,56 @@
-# AppTelemetria
+# 🛰️ AppTelemetria 
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.2.5.
+**AppTelemetria** es una aplicación web frontend desarrollada con **Angular** que simula un panel de monitorización en tiempo real para supervisar el estado de distintas sondas espaciales en el sistema solar. 
 
-## Development server
+Este proyecto nació como una prueba práctica para poner en marcha los conceptos fundamentales de Angular moderno: comunicación entre componentes, control de flujo, directivas personalizadas y transformación de datos mediante pipes.
 
-To start a local development server, run:
+---
 
-```bash
-ng serve
-```
+##  ¿Qué hace esta aplicación?
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+El panel permite visualizar y gestionar una flota de sondas (como *Voyager-IX* en Marte o *Kronos-Orbiter* en Saturno) ofreciendo las siguientes funcionalidades:
 
-## Code scaffolding
+* **Monitorización general:** Muestra un resumen superior con el total de sondas que se encuentran actualmente en línea.
+* **Filtro de emergencias:** Permite alternar la vista para mostrar únicamente las sondas en estado crítico (batería por debajo del 20% o desconectadas). Si todo está en orden, el sistema lo indica.
+* **Pulso de recarga solar:** Cada sonda cuenta con un botón interactivo para enviarle energía. Al pulsarlo, suma un **+25% de batería** (hasta un máximo del 100%) y restablece su conexión si estaba fuera de línea.
+* **Alertas visuales dinámicas:** Las tarjetas reaccionan visualmente al estado de cada nave mediante indicadores de batería baja, barras de progreso, estilos de desconexión y bordes de advertencia animados.
+* **Cálculo de retardo de señal:** Calcula automáticamente cuánto tarda en llegar una transmisión desde la sonda hasta la Tierra en función de su distancia y la velocidad de la luz ($300.000\text{ km/s}$), mostrando el resultado en segundos o minutos.
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+---
 
-```bash
-ng generate component component-name
-```
+##  Arquitectura y conceptos aplicados
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+Aunque es una aplicación sencilla (100% frontend con datos simulados en memoria), está estructurada siguiendo buenas prácticas de Angular:
 
-```bash
-ng generate --help
-```
+1. **Componentes (`CentroControl` y `PanelSonda`):** Separación de responsabilidades entre el panel principal (que gestiona el estado global y los filtros) y las tarjetas individuales (que reciben datos mediante `@Input()` y notifican acciones con `@Output()`).
+2. **Directivas Estructurales:** Uso de control de flujo (`@for`, `@if`, `@switch`) para renderizar dinámicamente las tarjetas, avisos de batería crítica e iconos según el planeta de destino.
+3. **Directivas de Atributo:** Combinación de `ngClass` / `ngStyle` con una directiva personalizada (`appPulsoAlerta`) para resaltar visualmente las naves sin conexión.
+4. **Pipes Nativos y Personalizados:** Uso de `UpperCasePipe`, `TitleCasePipe` y `DatePipe` para formatear textos y fechas, junto con un pipe propio (`retardoSenal`) para las conversiones astronómicas.
 
-## Building
+---
 
-To build the project run:
+##  Cómo ejecutar el proyecto en local
 
-```bash
-ng build
-```
+Si quieres probar la aplicación en tu ordenador, sigue estos pasos:
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+1. **Clona el repositorio:**
+   ```bash
+   git clone https://github.com/CesarGalanGit/AppTelemetria.git
+   cd AppTelemetria
+   ```
 
-## Running unit tests
+2. **Instala las dependencias:**
+   ```bash
+   npm install
+   ```
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+3. **Arranca el servidor de desarrollo:**
+   ```bash
+   ng serve
+   ```
 
-```bash
-ng test
-```
+4. Abre tu navegador y entra en `http://localhost:4200/`.
 
-## Running end-to-end tests
+---
 
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+*Desarrollado con Angular.*

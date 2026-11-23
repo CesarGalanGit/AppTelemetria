@@ -1,4 +1,11 @@
-<article class="card h-100 shadow-sm">
+<article
+  class="card h-100 shadow-sm"
+  [appPulsoAlerta]="!sonda.enLinea"
+  [ngStyle]="{
+    'border-style': !sonda.enLinea ? 'dashed' : 'solid',
+    opacity: !sonda.enLinea ? '0.75' : '1'
+  }"
+>
   <header class="card-header bg-white border-0 d-flex justify-content-between align-items-start gap-3 pt-4 px-4">
     <div>
       <p class="text-secondary fw-bold small mb-1">{{ sonda.id }}</p>
@@ -43,7 +50,15 @@
       </div>
       <div class="col-6">
         <dt class="text-secondary small">Batería</dt>
-        <dd class="fw-semibold mb-0">{{ sonda.bateria }}%</dd>
+        <dd
+          class="fw-semibold mb-0"
+          [ngClass]="{
+            'text-danger': sonda.bateria < 20,
+            'text-warning': sonda.bateria >= 20 && sonda.bateria < 50
+          }"
+        >
+          {{ sonda.bateria }}%
+        </dd>
       </div>
       <div class="col-6">
         <dt class="text-secondary small">Distancia</dt>
@@ -56,6 +71,20 @@
         </dd>
       </div>
     </dl>
+
+    <div class="progress mt-4" role="progressbar" [attr.aria-valuenow]="sonda.bateria" aria-valuemin="0" aria-valuemax="100">
+      <div
+        class="progress-bar"
+        [ngClass]="{
+          'bg-danger': sonda.bateria < 20,
+          'bg-warning': sonda.bateria >= 20 && sonda.bateria < 50,
+          'bg-success': sonda.bateria >= 50
+        }"
+        [ngStyle]="{ width: sonda.bateria + '%' }"
+      >
+        {{ sonda.bateria }}%
+      </div>
+    </div>
   </div>
 
   <footer class="card-footer bg-white border-0 px-4 pb-4">

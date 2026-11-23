@@ -26,18 +26,26 @@
   </header>
 
   <section class="row g-4" aria-label="Listado de sondas">
-    @for (sonda of sondasVisibles; track sonda.id) {
-      <div class="col-12 col-md-6 col-xl-4">
-        <app-panel-sonda
-          [sonda]="sonda"
-          (pulsoRecarga)="recargarSonda($event)"
-        />
-      </div>
-    } @empty {
+    @if (sondasVisibles.length > 0) {
+      @for (sonda of sondasVisibles; track sonda.id) {
+        <div class="col-12 col-md-6 col-xl-4">
+          <app-panel-sonda
+            [sonda]="sonda"
+            (pulsoRecarga)="recargarSonda($event)"
+          />
+        </div>
+      }
+    } @else {
       <div class="col-12">
-        <p class="alert alert-info text-center mb-0">
-          No hay sondas en alerta.
-        </p>
+        @if (soloAlertas) {
+          <p class="alert alert-success text-center mb-0">
+            Todos los sistemas nominales. Sin alertas activas.
+          </p>
+        } @else {
+          <p class="alert alert-info text-center mb-0">
+            No hay sondas disponibles.
+          </p>
+        }
       </div>
     }
   </section>

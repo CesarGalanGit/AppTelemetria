@@ -12,10 +12,34 @@
   </header>
 
   <div class="card-body px-4">
+    @if (sonda.bateria < 20) {
+      <div class="alert alert-danger py-2 mb-3" role="alert">
+        <strong>BATERÍA CRÍTICA</strong>
+      </div>
+    }
+
     <dl class="row gy-3 mb-0">
       <div class="col-6">
         <dt class="text-secondary small">Destino</dt>
-        <dd class="fw-semibold mb-0">{{ sonda.planetaDestino }}</dd>
+        <dd class="fw-semibold mb-0">
+          @switch (sonda.planetaDestino) {
+            @case ('marte') {
+              <span aria-label="Marte">🔴 Marte</span>
+            }
+            @case ('venus') {
+              <span aria-label="Venus">🟠 Venus</span>
+            }
+            @case ('saturno') {
+              <span aria-label="Saturno">🪐 Saturno</span>
+            }
+            @case ('júpiter') {
+              <span aria-label="Júpiter">🟤 Júpiter</span>
+            }
+            @default {
+              <span>{{ sonda.planetaDestino }}</span>
+            }
+          }
+        </dd>
       </div>
       <div class="col-6">
         <dt class="text-secondary small">Batería</dt>
